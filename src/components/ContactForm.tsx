@@ -14,7 +14,15 @@ const ContactForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ContactFormData>();
+  } = useForm<ContactFormData>({
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
+    }
+  });
 
   const onSubmit = async (data: ContactFormData) => {
     // バリデーションエラーをリセット
@@ -83,7 +91,7 @@ const ContactForm = () => {
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} suppressHydrationWarning>
           <div className="form-section">
             <label htmlFor="name" className="form-label">
               お名前 <span className="text-red-500">*</span>
